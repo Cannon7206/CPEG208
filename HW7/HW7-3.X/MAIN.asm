@@ -1,0 +1,70 @@
+#include "p16f84a.inc"
+
+; CONFIG
+; __config 0xFFF9
+ __CONFIG _FOSC_XT & _WDTE_OFF & _PWRTE_OFF & _CP_OFF
+
+CBLOCK 0X10
+    COIN
+    COUNT1
+    COUNT2
+    COUNT3
+    MINCOUNT
+ENDC
+    
+    ORG	    0X00
+    GOTO    SETUP
+    ORG	    0X04
+    RETFIE
+    
+SETPORT
+    BSF	    STATUS, RP0
+    MOVLW   0XFF
+    MOVWF   TRISA
+    CLRF    TRISB
+    CLRF    W
+    BCF	    STATUS, RP0
+    RETURN
+    
+SETUP
+    CALL    SETPORT
+    GOTO    MAIN
+    
+MAIN
+    CALL    MINUTE
+    BSF	    PORTB,0
+    CALL    SECOND
+    BCF	    PORTB,0
+
+
+MINUTE
+    MOVLW   0X3C
+    MOVWF   MINCOUNT
+MINUTE1
+    CALL    SECOND
+    DECFSZ  MINCOUNT,1
+    GOTO    MINUTE1
+    RETURN
+
+SECOND
+    MOVLW   D'59'
+    MOVWF   COUNT1
+L1
+    MOVLW   D'74'
+    MOVWF   COUNT2
+L2
+    MOVLW   D'75'
+    MOVWF   COUNT3
+L3
+
+    DECFSZ  COUNT3
+    GOTO    L3
+    
+    DECFSZ  COUNT2
+    GOTO    L2
+    
+    DECFSZ  COUNT1
+    GOTO    L1
+    RETURN
+    
+    END
