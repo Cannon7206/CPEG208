@@ -31,16 +31,13 @@ SETUP
     MOVWF   GREENLED        ; RA1 = Green LED
     GOTO    MAIN
 
-;--------------------------------------------------
-; AA
+
 MAIN
     MOVF    PORTB, W        ; Read weight
     ADDLW   D'245'          ; Carry set if PORTB >= 11 (WEIGHT > 10)
     BTFSC   STATUS, C
     GOTO    GREEN           ; Yes -> GREENON -> BB
     GOTO    RED             ; No  -> REDON  -> BB
-
-;--------------------------------------------------
 GREEN                       ; GREENON
     CALL    GREENLEDON
     GOTO    MAIN            ; BB -> back to AA
@@ -48,8 +45,6 @@ GREEN                       ; GREENON
 RED                         ; REDON
     CALL    REDLEDON
     GOTO    MAIN            ; BB -> back to AA
-
-;--------------------------------------------------
 REDLEDON
     MOVF    REDLED, W
     MOVWF   PORTA
