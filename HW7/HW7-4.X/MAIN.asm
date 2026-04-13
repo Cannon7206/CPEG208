@@ -1,0 +1,60 @@
+#include "p16f84a.inc"
+
+; CONFIG
+; __config 0xFFF9
+ __CONFIG _FOSC_XT & _WDTE_OFF & _PWRTE_OFF & _CP_OFF
+
+CBLOCK
+    REDLED
+    GREENLED
+ENDC
+    
+    ORG	    0X00
+    GOTO    SETUP
+    ORG	    0X04
+    RETFIE
+    
+SETPORT
+    BSF	    STATUS, RP0
+    CLRF    TRISA
+    MOVLW   0XFF
+    MOVWF   TRISB
+    MOVLW   0X00
+    BCF	    STATUS, RP0
+    
+SETUP
+    CALL    SETPORT
+    CLRF    PORTA
+    MOVLW   0x01
+    MOVWF   REDLED
+    MOVLW   0X02
+    MOVWF   GREENLED
+    GOTO    MAIN
+    
+    
+MAIN
+    MOVF    PORTB, W
+    SUBLW   D'10'
+    BTFSC   STATUS, C
+    GOTO    RED
+    GOTO    GREEN
+
+RED
+    CALL    REDLEDON
+    GOTO    MAIN
+   
+GREEN
+    CALL    GREENLEDON
+    GOTO    MAIN
+    
+    
+    
+REDLEDON
+    MOVF    REDLED, W
+    MOVWF   PORTA
+    RETURN
+    
+GREENLEDON
+    MOVF    GREENLED, W
+    MOVWF   PORTA
+    RETURN
