@@ -28,12 +28,14 @@ SETPORT
     
 SETUP
     CALL    SETPORT
+    CLRF    PORTB
+    CLRF    PORTA
     GOTO    MAIN
     
 MAIN
     CALL    MINUTE
     BSF	    PORTB,0
-    CALL    SECOND
+    CALL    MINUTE
     BCF	    PORTB,0
 
 
