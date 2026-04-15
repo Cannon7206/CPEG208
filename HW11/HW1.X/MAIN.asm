@@ -30,8 +30,11 @@ MAIN
     GOTO    MAIN
     
 ON_OFF
-    BTFSC   PORTA, 0
+    BTFSS   PORTA, 0
+    GOTO    ON_OFF_1
     CALL    MOTOR_ON
+    RETURN
+ON_OFF_1
     CALL    MOTOR_OFF
     RETURN
     
@@ -86,7 +89,7 @@ MEDIUM_BOX
 LARGE_BOX
     BCF	    PORTB, 1
     BCF	    PORTB, 2
-    BCF	    PORTB, 3
+    BSF	    PORTB, 3
     RETURN
     
     END
