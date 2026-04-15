@@ -16,6 +16,7 @@ This repository contains coursework for **CPEG 208: Microprocessors**, covering 
 | `HW5.X` | Homework 5 — MPLAB X project |
 | `HW7` | Homework 7 |
 | `HW10` | Homework 10 |
+| `HW11` | Homework 11 |
 | `lab3.X` | Lab 3 — MPLAB X project |
 | `LAB4.X` | Lab 4 — MPLAB X project |
 | `DSUM.X` | Data summation program |
