@@ -1,0 +1,22 @@
+#include "p16f84a.inc"
+__CONFIG _FOSC_HS & _WDTE_OFF & _PWRTE_OFF & _CP_OFF
+
+CBLOCK	0X0C
+    POWER
+ENDC
+
+    ORG	    0X00
+    GOTO    SETUP
+    ORG	    0X04
+    RETFIE
+    
+SETUP
+    CALL    SETPORT
+    GOTO    MAIN
+    
+SETPORT
+    BSF	    STATUS, RP0
+    MOVLW   0X0F
+    MOVWF   TRISA
+    CLRF    TRISB
+    BCF	    STATUS, RP0
