@@ -36,4 +36,4 @@ This repository contains coursework for **CPEG 208: Microprocessors**, covering 
 
 ## Academic Integrity
 
-This repository is for personal academic reference. If you're a fellow student, please do your own work — this is here as a portfolio artifact, not a shortcut.
+Imagine needing to copy someone else's work.
