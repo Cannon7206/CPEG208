@@ -2,7 +2,7 @@
 
 ; CONFIG
 ; __config 0xFFFA
-__CONFIG _FOSC_HS & _WDTE_OFF & _PWRTE_OFF & _CP_OFF
+ __CONFIG _FOSC_HS & _WDTE_OFF & _PWRTE_OFF & _CP_OFF
 
     ORG	    0X00
     GOTO    SETUP
@@ -24,7 +24,7 @@ SETPORT
     
 MAIN
     BTFSS   PORTA, 3
-    CALL    MAIN
+    CALL    MAIN1
     BTFSC   PORTA, 3
     CALL    MAIN2
     GOTO    MAIN

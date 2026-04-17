@@ -12,6 +12,7 @@
     
 SETUP
     CALL    SETPORT
+    CLRF    PORTA
     GOTO    MAIN
     
 SETPORT
